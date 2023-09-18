@@ -1,0 +1,25 @@
+def is_valid_binary(number):
+    # Функция для проверки, что число соответствует условиям задачи
+    if (i%2!=0):
+        binary_str = bin(number)[2:]
+        if (binary_str.count("11")==1):
+            return True
+        else:
+            return False
+
+def find_series_position(number):
+    # Функция для поиска позиции, с которой начинается серия из двух подряд идущих единиц
+    binary_str = bin(number)[2:]
+    for i in range(1, len(binary_str)):
+        if binary_str[i] == '1' and binary_str[i-1] == '1':
+            return i
+    return None
+
+# Основная часть программы
+for i in range(1, 4097):
+    if is_valid_binary(i):
+        series_position = find_series_position(i)
+        binary_str = bin(i)[2:].replace('11', '')  # Удаление единиц из двоичного числа
+        print(f"Десятичное число: {i}, Двоичное число без единиц: {binary_str, 2}")
+        if series_position is not None:
+            print(f"Серия из двух подряд идущих единиц начинается с позиции: {series_position}")
